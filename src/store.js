@@ -36,7 +36,7 @@ export default new Vuex.Store({
       const likedIndex = likedBy.indexOf(userId);
 
       if (likedIndex > -1) {
-        likedBy = likedBy.slice(likedIndex, likedIndex);
+        likedBy.splice(likedIndex, 1);
       } else {
         likedBy.push(userId);
       }
