@@ -1,0 +1,37 @@
+/*----------------------------------------*\
+  TRANSITIONS
+\*----------------------------------------*/
+
+/**
+ * Fade
+ */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/**
+ * List
+ */
+
+.list-item {
+  transition: all 0.6s ease-out;
+  will-change: transform;
+}
+
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-leave-active {
+  position: absolute;
+  width: 100%;
+}

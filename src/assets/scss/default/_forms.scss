@@ -1,0 +1,15 @@
+/*----------------------------------------*\
+  FORMS
+\*----------------------------------------*/
+
+.field {
+  &:-moz-ui-invalid {
+    outline: none;
+    border-color: $color-red;
+    box-shadow: 0 0 0 3px rgba($color-red, 0.3);
+  }
+
+  &:focus {
+    box-shadow: 0 3px 12px rgba($alt-color, 0.5);
+  }
+}

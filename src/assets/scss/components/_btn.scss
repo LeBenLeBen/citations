@@ -1,0 +1,51 @@
+/*----------------------------------------*\
+  BUTTON
+\*----------------------------------------*/
+
+.btn--primary {
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.btn--default {
+  font-weight: bold;
+}
+
+.btn--text-icon {
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+
+  font-size: rem(40px);
+  line-height: 0.63em;
+}
+
+.btn--circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 56px;
+
+  font-size: rem(24px);
+
+  border-radius: 50%;
+}
+
+.btn__badge {
+  display: block;
+  min-width: 26px;
+  padding: 5px;
+
+  position: absolute;
+  top: -5px;
+  right: -5px;
+
+  color: white;
+  font-size: rem(16px);
+  font-weight: bold;
+  line-height: 1;
+
+  background-color: #d97593;
+  border-radius: 50%;
+}
