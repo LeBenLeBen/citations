@@ -18,7 +18,6 @@ export default class AuthorsController {
         if (querySnapshot.empty) {
           return this.create({ name });
         }
-        return Promise.reject();
       });
   }
 }
