@@ -6,3 +6,8 @@
   color: $alt-color-darker;
   font-family: 'Erica One', sans-serif;
 }
+
+a {
+  text-decoration-skip-ink: auto;
+  text-decoration-skip: ink;
+}

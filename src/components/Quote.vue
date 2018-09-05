@@ -91,7 +91,6 @@ export default {
   z-index: 2;
 
   color: rgba(0, 0, 0, 0.8);
-  font-size: 20px;
 
   background-color: $alt-color-lighter;
   border-radius: 40px;
