@@ -99,6 +99,7 @@ export default {
     filtersCount() {
       let count = 0;
       this.author && count++;
+      this.order !== 'date' && count++;
       return count;
     },
   },
@@ -162,7 +163,8 @@ export default {
 
     resetFilters() {
       this.author = '';
-      this.filter = 'date';
+      this.order = 'date';
+      this.filtersOpen = false;
     },
   },
 };

@@ -103,7 +103,7 @@ export default {
     save() {
       let { quote, author, interlocutor, date } = this;
       QuotesController.create({ quote, author, interlocutor, date }).then(
-        doc => {
+        () => {
           this.$store.dispatch('loadQuotes', true);
           this.$router.push({ name: 'home' });
           this.$notify({
