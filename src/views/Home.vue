@@ -13,8 +13,8 @@
       <ul class="list-stacked list-stacked--small">
         <li>
           <div class="relative-parent">
-            <button class="btn btn--default btn--circle" @click.prevent="filtersOpen = !filtersOpen">
-              🔍
+            <button class="btn btn--default btn--circle" @click.prevent="filtersOpen = !filtersOpen" title="Filtrer">
+              <filter-icon class="icon" />
               <span v-if="filtersCount" class="btn__badge">{{ filtersCount }}</span>
             </button>
             <Popover :open="this.filtersOpen">
@@ -39,7 +39,9 @@
           </div>
         </li>
        <li>
-          <router-link to="/add" class="btn btn--primary btn--circle">✏️</router-link>
+          <router-link to="/add" class="btn btn--primary btn--circle" title="Ajouter une entrée">
+            <plus-icon class="icon" />
+          </router-link>
         </li>
       </ul>
     </div>
@@ -52,6 +54,8 @@ import { database } from '@/services/firebase';
 import Quote from '@/components/Quote';
 import Popover from '@/components/Popover';
 import Loader from '@/components/Loader';
+import filterIcon from '@/assets/icons/filter.svg';
+import plusIcon from '@/assets/icons/plus.svg';
 
 export default {
   name: 'home',
@@ -60,6 +64,8 @@ export default {
     Quote,
     Popover,
     Loader,
+    'filter-icon': filterIcon,
+    'plus-icon': plusIcon,
   },
 
   data() {

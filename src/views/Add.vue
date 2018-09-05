@@ -19,8 +19,12 @@
             </select>
           </div>
           <div class="grid__item w-1/4 sm-w-1/5">
-            <button type="button" class="btn btn--default btn--text-icon" @click="toggleUserMode">
-              {{ newUserMode ? '-' : '+' }}
+            <button type="button"
+              class="btn btn--default btn--text-icon"
+              @click="toggleUserMode"
+              :title="newUserMode ? 'Utiliser un auteur existant' : 'Ajouter un auteur'">
+              <minus-icon v-if="newUserMode" class="icon" />
+              <plus-icon v-else class="icon" />
             </button>
           </div>
         </div>
@@ -71,8 +75,15 @@ import { database } from '@/services/firebase';
 import { format } from '@/helpers/date';
 import QuotesController from '@/controllers/QuotesController';
 import AuthorsController from '@/controllers/AuthorsController';
+import minusIcon from '@/assets/icons/minus.svg';
+import plusIcon from '@/assets/icons/plus.svg';
 
 export default {
+  components: {
+    'minus-icon': minusIcon,
+    'plus-icon': plusIcon,
+  },
+
   data() {
     return {
       authors: [],

@@ -6,7 +6,11 @@
       <ul class="list-inline list-inline--small list-inline--right">
         <li class="hidden-xs-down">{{ name }}</li>
         <li class="hidden-xs-down"><Avatar :src="user.photoURL" /></li>
-        <li><button type="button" class="btn btn--circle btn--default" @click="logout">👋🏻</button></li>
+        <li>
+          <button type="button" class="btn btn--circle btn--default" @click="logout" title="Se déconnecter">
+            <leave-icon class="icon" />
+          </button>
+        </li>
       </ul>
     </header>
 
@@ -29,11 +33,13 @@ import { mapState, mapMutations } from 'vuex';
 import { auth } from '@/services/firebase';
 import Login from '@/components/Login';
 import Avatar from '@/components/Avatar';
+import leaveIcon from '@/assets/icons/leave.svg';
 
 export default {
   components: {
     Login,
     Avatar,
+    'leave-icon': leaveIcon,
   },
 
   data() {
