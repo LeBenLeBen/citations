@@ -151,7 +151,7 @@ export default {
 .like__icon {
   width: 18px;
   height: 18px;
-  margin-left: 10px;
+  margin-left: 14px;
   margin-right: 2px;
 
   fill: currentColor;
