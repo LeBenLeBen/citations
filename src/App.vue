@@ -4,8 +4,8 @@
       <h1 class="app-title app-title--shrinked"><router-link to="/">Quotes</router-link></h1>
 
       <ul class="list-inline list-inline--small list-inline--right">
-        <li>{{ name }}</li>
-        <li><Avatar :src="user.photoURL" /></li>
+        <li class="hidden-xs-down">{{ name }}</li>
+        <li class="hidden-xs-down"><Avatar :src="user.photoURL" /></li>
         <li><button type="button" class="btn btn--circle btn--default" @click="logout">👋🏻</button></li>
       </ul>
     </header>
