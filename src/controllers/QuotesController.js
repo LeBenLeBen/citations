@@ -21,7 +21,7 @@ export default class QuotesController {
       .then(doc => {
         if (options.triggerSlackWebhook) {
           this.triggerSlackWebhook({
-            text,
+            quote,
             author,
             interlocutor,
             quoteId: doc.id,
@@ -49,19 +49,16 @@ export default class QuotesController {
         return database
           .collection(this.scope)
           .doc(quoteId)
-          .set(
-            {
-              likedBy: likers,
-            },
-            { merge: true },
-          );
+          .set({ likedBy: likers }, { merge: true });
       });
   }
 
-  static triggerSlackWebhook({ text, author, interlocutor, quoteId }) {
+  static triggerSlackWebhook({ quote, author, interlocutor, quoteId }) {
     if (!process.env.VUE_APP_SLACK_WEBHOOK_URL) return;
 
-    text += `\n— *${author}*${interlocutor ? ` à *${interlocutor}*` : ''}`;
+    const text = `${quote}\n— *${author}*${
+      interlocutor ? ` à *${interlocutor}*` : ''
+    }`;
     const url = `${window.location.origin}/quote/${quoteId}`;
     const colors = [
       '#a3d774',
