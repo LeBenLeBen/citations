@@ -55,6 +55,7 @@
 // @import '~kanbasu/src/scss/helpers/align-responsive';
 
 @import 'helpers/transitions';
+@import 'helpers/text';
 
 /**
  * Components
@@ -75,6 +76,5 @@
 // @import '~kanbasu/src/scss/components/pusher';
 // @import '~kanbasu/src/scss/components/table-responsive';
 
-@import 'components/field';
 @import 'components/btn';
 @import 'components/icon';

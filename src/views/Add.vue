@@ -7,20 +7,20 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="grid">
+        <div class="grid grid--middle">
           <div class="grid__item sm-w-1/4">
             <label for="author" class="field-label sm-text-right">Auteur</label>
           </div>
           <div class="grid__item w-3/4 sm-w-2/5">
-            <input v-if="newUserMode" ref="author" type="text" v-model="author" id="author" class="field" required>
-            <select v-else ref="author" v-model="author" id="author" class="field" required>
+            <input v-if="newUserMode" ref="author" type="text" v-model="author" id="author" class="field">
+            <select v-else ref="author" v-model="author" id="author" class="field">
               <option value="" selected></option>
               <option v-for="(author, i) in authors" :key="i">{{ author.name }}</option>
             </select>
           </div>
           <div class="grid__item w-1/4 sm-w-1/5">
             <button type="button"
-              class="btn btn--default btn--text-icon"
+              class="btn btn--default btn--circle"
               @click="toggleUserMode"
               :title="newUserMode ? 'Utiliser un auteur existant' : 'Ajouter un auteur'">
               <minus-icon v-if="newUserMode" class="icon" />
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="grid">
+        <div class="grid grid--middle">
           <div class="grid__item sm-w-1/4">
             <label for="interlocutor" class="field-label sm-text-right">Interlocuteur</label>
           </div>
@@ -40,9 +40,9 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="grid">
+        <div class="grid grid--middle">
           <div class="grid__item sm-w-1/4">
-            <label for="date" class="field-label sm-text-right">Date</label>
+            <label for="date" class="field-label sm-text-right">Date <abbr title="Requis" class="text-danger">*</abbr></label>
           </div>
           <div class="grid__item sm-w-2/5">
             <input v-model="date" type="date" id="date" class="field" required>
@@ -52,7 +52,7 @@
       <div class="form-group">
         <div class="grid">
           <div class="grid__item sm-w-1/4">
-            <label for="quote" class="field-label sm-text-right">Poésie</label>
+            <label for="quote" class="field-label sm-text-right">Poésie <abbr title="Requis" class="text-danger">*</abbr></label>
           </div>
           <div class="grid__item sm-w-3/4">
             <textarea v-model="quote" id="quote" rows="3" class="field" required></textarea>

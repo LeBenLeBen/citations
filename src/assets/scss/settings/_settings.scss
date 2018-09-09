@@ -40,7 +40,7 @@ $font-family-default: Palanquin, serif;
 
 $font-size-default: 18px;
 $font-size-small: 0.75rem;
-$font-size-large: 1.5rem;
+$font-size-large: 1.33333rem;
 
 $line-height-default: 1.45;
 
@@ -140,7 +140,7 @@ $btn-primary-active-bkg-color: darken($btn-primary-bkg-color, 5%);
  * Forms
  */
 
-$field-padding: $spacing-unit-small/$ratio 16px;
+$field-padding: 13px 20px;
 
 $field-color: inherit;
 $field-font-size: inherit;
@@ -150,7 +150,7 @@ $field-line-height: $line-height-default;
 $field-bkg-color: white;
 $field-border: 2px solid darken($alt-color-lighter, 4%);
 $field-focus-border-color: $alt-color;
-$field-border-radius: 22px;
+$field-border-radius: 28px;
 
 $field-disabled-bkg-color: $alt-color-lighter;
 $field-disabled-color: $alt-color;
@@ -167,7 +167,7 @@ $field-large-border-radius: $border-radius-large;
 
 $field-help-color: $alt-color-light;
 
-$form-group-spacing: $spacing-unit-default;
+$form-group-spacing: $spacing-unit-small;
 
 /**
  * Lists

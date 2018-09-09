@@ -8,7 +8,7 @@
     <div class="quote__meta">
       <strong>{{ quote.author }}</strong>
       <span v-if="quote.interlocutor"> à <strong>{{ quote.interlocutor }}</strong></span>
-      le <router-link :to="`/quote/${quote.id}`">{{ date }}</router-link>
+      le&nbsp;<router-link :to="`/quote/${quote.id}`" class="text-nowrap">{{ date }}</router-link>
       <button :class="['btn btn--bare like', { 'like--liked': liked }]"
         type="button"
         @click="toggleLike"
@@ -79,13 +79,21 @@ export default {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
+
+  .list-item:first-child & {
+    margin-top: 0;
+  }
+
+  .list-item:last-child & {
+    margin-bottom: 0;
+  }
 }
 
 .quote__body {
   min-width: 100%;
   width: max-content;
   max-width: 100%;
-  padding: $spacing-unit-default $spacing-unit-large;
+  padding: $spacing-unit-small $spacing-unit-default;
 
   position: relative;
   z-index: 2;
@@ -93,18 +101,29 @@ export default {
   color: rgba(0, 0, 0, 0.8);
 
   background-color: $alt-color-lighter;
-  border-radius: 40px;
+  border-radius: 20px;
   transition: background-color 0.3s ease-out;
+
+  @include media('sm') {
+    padding: $spacing-unit-default $spacing-unit-large;
+
+    border-radius: 40px;
+  }
 }
 
 .quote__meta {
-  padding: $spacing-unit-tiny 90px 0;
+  padding: $spacing-unit-tiny 70px 0;
 
   position: relative;
   z-index: 1;
 
   font-size: rem(16px);
   color: $alt-color;
+
+  @include media('sm') {
+    padding-left: 90px;
+    padding-right: 90px;
+  }
 
   &::before,
   &::after {
@@ -115,9 +134,13 @@ export default {
 
     position: absolute;
     top: -25px;
-    left: 46px;
+    left: 30px;
 
     border-radius: 50%;
+
+    @include media('sm') {
+      left: 46px;
+    }
   }
 
   &::before {

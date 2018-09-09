@@ -18,7 +18,7 @@ export default {
 .popover {
   width: max-content;
   max-width: 65vw;
-  padding: $spacing-unit-default;
+  padding: $spacing-unit-small;
 
   position: absolute;
   bottom: 100%;
@@ -27,6 +27,10 @@ export default {
   background-color: $alt-color-lighter;
   border-radius: 20px;
   transform-origin: bottom right;
+
+  @include media('sm') {
+    padding: $spacing-unit-default;
+  }
 }
 
 .pop-enter-active {
