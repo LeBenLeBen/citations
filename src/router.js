@@ -29,12 +29,5 @@ export default new Router({
         return import(/* webpackChunkName: "add" */ './views/Add.vue');
       },
     },
-    {
-      path: '/import',
-      name: 'import',
-      component: () => {
-        return import(/* webpackChunkName: "import" */ './views/Import.vue');
-      },
-    },
   ],
 });
