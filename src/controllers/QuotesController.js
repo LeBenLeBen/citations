@@ -27,6 +27,7 @@ export default class QuotesController {
             quoteId: doc.id,
           });
         }
+        return doc;
       });
   }
 
