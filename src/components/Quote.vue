@@ -112,7 +112,7 @@ export default {
 }
 
 .quote__meta {
-  padding: $spacing-unit-tiny 70px 0;
+  padding: $spacing-unit-tiny 75px 0;
 
   position: relative;
   z-index: 1;

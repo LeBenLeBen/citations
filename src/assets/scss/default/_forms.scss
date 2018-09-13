@@ -2,7 +2,16 @@
   FORMS
 \*----------------------------------------*/
 
+input[type='text'],
+input[type='date'],
+textarea {
+  appearance: none;
+  box-sizing: border-box;
+}
+
 .field {
+  box-shadow: none;
+
   &:-moz-ui-invalid {
     outline: none;
     border-color: $color-red;
