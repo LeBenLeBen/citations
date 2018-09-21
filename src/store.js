@@ -9,7 +9,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    quotes: [],
+    quotes: {},
+    quotesFiltered: [],
     lastQuote: null,
     complete: false,
     user: {},
@@ -18,6 +19,12 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    resetList(state) {
+      state.quotesFiltered = [];
+      state.lastQuote = null;
+      state.complete = false;
+    },
+
     setUser(state, user) {
       state.user = user;
     },
@@ -28,6 +35,22 @@ export default new Vuex.Store({
 
     setOrder(state, order) {
       state.order = order;
+    },
+
+    addQuote(state, quote) {
+      Vue.set(state.quotes, quote.id, quote);
+    },
+
+    addQuoteToList(state, quoteId) {
+      state.quotesFiltered.push(quoteId);
+    },
+
+    setLastQuote(state, quote) {
+      state.lastQuote = quote;
+    },
+
+    setIsComplete(state) {
+      state.complete = true;
     },
 
     toggleLike(state, { quoteId, userId }) {
@@ -46,7 +69,7 @@ export default new Vuex.Store({
   },
 
   actions: {
-    loadQuotes({ state }, reset = false) {
+    loadQuotes({ state, commit }, reset = false) {
       let ref = database.collection('quotes');
       if (state.author) ref = ref.where('author', '==', state.author);
       ref = ref.orderBy(state.order, 'desc');
@@ -56,32 +79,46 @@ export default new Vuex.Store({
       return ref.get().then(
         querySnapshot => {
           if (reset) {
-            state.quotes = [];
-            state.lastQuote = null;
-            state.complete = false;
+            commit('resetList');
           }
 
           querySnapshot.forEach(doc => {
-            state.quotes.push({
-              id: doc.id,
-              ...doc.data(),
-            });
+            const quoteId = doc.id;
+            const quote = { id: quoteId, ...doc.data() };
+            commit('addQuote', quote);
+            commit('addQuoteToList', quoteId);
           });
 
           if (querySnapshot.docs.length) {
-            state.lastQuote = querySnapshot.docs[querySnapshot.docs.length - 1];
+            commit(
+              'setLastQuote',
+              querySnapshot.docs[querySnapshot.docs.length - 1],
+            );
           } else {
-            state.complete = true;
+            commit('setIsComplete');
           }
         },
         error => {
           Vue.notify({
             type: 'error',
-            title: 'Impossible d’accéder aux citations',
+            title: 'Impossible de charger les citations',
             text: error.message,
           });
         },
       );
+    },
+
+    loadQuote({ commit }, id) {
+      return database
+        .collection('quotes')
+        .doc(id)
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            const quote = { id: doc.id, ...doc.data() };
+            commit('addQuote', quote);
+          }
+        });
     },
 
     setAuthor({ commit, dispatch }, author) {
@@ -118,6 +155,12 @@ export default new Vuex.Store({
           });
         },
       );
+    },
+  },
+
+  getters: {
+    quotesFiltered(state) {
+      return state.quotesFiltered.map(id => state.quotes[id]);
     },
   },
 });

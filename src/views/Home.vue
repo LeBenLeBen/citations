@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { database } from '@/services/firebase';
 import Quote from '@/components/Quote';
 import Popover from '@/components/Popover';
@@ -80,7 +80,10 @@ export default {
   },
 
   computed: {
-    ...mapState(['quotes', 'complete']),
+    ...mapState(['complete']),
+    ...mapGetters({
+      quotes: 'quotesFiltered',
+    }),
 
     author: {
       get() {
@@ -111,7 +114,7 @@ export default {
   },
 
   created() {
-    if (!this.$store.state.quotes.length) {
+    if (!this.$store.state.quotesFiltered.length) {
       this.load();
     }
   },

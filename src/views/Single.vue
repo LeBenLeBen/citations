@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import { database } from '@/services/firebase';
 import Quote from '@/components/Quote';
 import Loader from '@/components/Loader';
 
@@ -20,22 +19,20 @@ export default {
     id: String,
   },
 
-  data() {
-    return {
-      quote: null,
-    };
-  },
-
   computed: {
+    quote() {
+      return this.$store.state.quotes[this.id];
+    },
+
     className() {
       return `quote--color-${Math.floor(Math.random() * 5 + 1)}`;
     },
   },
 
-  firestore() {
-    return {
-      quote: database.collection('quotes').doc(this.id),
-    };
+  created() {
+    if (!this.quote) {
+      this.$store.dispatch('loadQuote', this.id);
+    }
   },
 };
 </script>
