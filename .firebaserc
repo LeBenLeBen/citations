@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "citations-f57c6"
+    "default": "citations-f57c6",
+    "dev": "citations-dev"
   }
 }
