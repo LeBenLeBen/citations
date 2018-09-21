@@ -15,7 +15,7 @@
         :title="liked ? 'Je n’aime plus' : 'J’aime'">
         <heart-alt-icon v-if="liked" class="like__icon icon" />
         <heart-icon v-else class="like__icon icon" />
-        {{ (quote.likedBy && quote.likedBy.length) || 0 }}
+        {{ quote.likes || 0 }}
       </button>
     </div>
   </div>

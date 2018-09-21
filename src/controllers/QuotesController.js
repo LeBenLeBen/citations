@@ -39,18 +39,21 @@ export default class QuotesController {
       .then(querySnapshot => {
         const likers =
           (querySnapshot.data() && querySnapshot.data().likedBy) || [];
+        let likes = querySnapshot.data().likes || likers.length;
         const index = likers.indexOf(userId);
 
         if (likers && index > -1) {
           likers.splice(index, 1);
+          likes--;
         } else {
           likers.push(userId);
+          likes++;
         }
 
         return database
           .collection(this.scope)
           .doc(quoteId)
-          .set({ likedBy: likers }, { merge: true });
+          .set({ likedBy: likers, likes }, { merge: true });
       });
   }
 

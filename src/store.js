@@ -56,15 +56,19 @@ export default new Vuex.Store({
     toggleLike(state, { quoteId, userId }) {
       const quote = _.find(state.quotes, quote => quote.id === quoteId);
       let likedBy = [...(quote.likedBy || [])];
+      let likes = quote.likes || likedBy.length;
       const likedIndex = likedBy.indexOf(userId);
 
       if (likedIndex > -1) {
         likedBy.splice(likedIndex, 1);
+        likes--;
       } else {
         likedBy.push(userId);
+        likes++;
       }
 
       Vue.set(quote, 'likedBy', likedBy);
+      quote.likes = likes;
     },
   },
 
