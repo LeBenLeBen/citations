@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quote.vue highlight like button if user has liked 1`] = `
+<div class="quote">
+  <div class="quote__body">
+    <ul class="list-stacked list-stacked--divided">
+      <li>Watson: excellent!</li>
+      <li>Sherlock: elementary.</li>
+    </ul>
+  </div>
+  <div class="quote__meta"><strong>Sherlock</strong> <span> à <strong>Watson</strong></span>
+    le&nbsp;<router-link-stub to="/quote/1" class="text-nowrap">1 janvier 2018</router-link-stub> <button type="button" title="Je n’aime plus" class="btn btn--bare like like--liked">
+      <heart-alt-icon-stub class="like__icon icon"></heart-alt-icon-stub>
+      1
+    </button></div>
+</div>
+`;
+
+exports[`Quote.vue renders quote 1`] = `
+<div class="quote">
+  <div class="quote__body">
+    <ul class="list-stacked list-stacked--divided">
+      <li>Watson: excellent!</li>
+      <li>Sherlock: elementary.</li>
+    </ul>
+  </div>
+  <div class="quote__meta"><strong>Sherlock</strong> <span> à <strong>Watson</strong></span>
+    le&nbsp;<router-link-stub to="/quote/1" class="text-nowrap">1 janvier 2018</router-link-stub> <button type="button" title="J’aime" class="btn btn--bare like">
+      <heart-icon-stub class="like__icon icon"></heart-icon-stub>
+      0
+    </button></div>
+</div>
+`;
