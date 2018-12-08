@@ -1,23 +1,21 @@
 import { database } from '@/services/firebase';
 
-export default class AuthorsController {
-  static scope = 'authors';
+const scope = 'authors';
 
-  static create({ name }) {
-    return database.collection(this.scope).add({
-      name,
+export function create({ name }) {
+  return database.collection(scope).add({
+    name,
+  });
+}
+
+export function createIfNotExists({ name }) {
+  return database
+    .collection(scope)
+    .where('name', '==', name)
+    .get()
+    .then(querySnapshot => {
+      if (querySnapshot.empty) {
+        return create({ name });
+      }
     });
-  }
-
-  static createIfNotExists({ name }) {
-    return database
-      .collection(this.scope)
-      .where('name', '==', name)
-      .get()
-      .then(querySnapshot => {
-        if (querySnapshot.empty) {
-          return this.create({ name });
-        }
-      });
-  }
 }

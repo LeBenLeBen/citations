@@ -73,8 +73,8 @@
 <script>
 import { database } from '@/services/firebase';
 import { format } from '@/helpers/date';
-import QuotesController from '@/controllers/QuotesController';
-import AuthorsController from '@/controllers/AuthorsController';
+import { create as createQuote } from '@/controllers/QuotesController';
+import { createIfNotExists as createAuthorIfNotExists } from '@/controllers/AuthorsController';
 import minusIcon from '@/assets/icons/minus.svg';
 import plusIcon from '@/assets/icons/plus.svg';
 
@@ -113,7 +113,7 @@ export default {
 
     save() {
       let { quote, author, interlocutor, date } = this;
-      QuotesController.create({ quote, author, interlocutor, date }).then(
+      createQuote({ quote, author, interlocutor, date }).then(
         () => {
           this.$store.dispatch('loadQuotes', true);
           this.$router.push({ name: 'home' });
@@ -131,7 +131,7 @@ export default {
           });
         },
       );
-      AuthorsController.createIfNotExists({
+      createAuthorIfNotExists({
         name: author,
       });
     },

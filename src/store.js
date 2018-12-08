@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import _ from 'lodash';
 
 import { database } from '@/services/firebase';
-import QuotesController from '@/controllers/QuotesController';
+import { toggleLike } from '@/controllers/QuotesController';
 
 Vue.use(Vuex);
 
@@ -144,7 +144,7 @@ export default new Vuex.Store({
         userId,
       });
 
-      return QuotesController.toggleLike({ userId, quoteId }).then(
+      return toggleLike({ userId, quoteId }).then(
         () => {},
         error => {
           // Revert in case of error
