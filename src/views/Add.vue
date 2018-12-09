@@ -115,6 +115,7 @@ export default {
       let { quote, author, interlocutor, date } = this;
       createQuote({ quote, author, interlocutor, date }).then(
         () => {
+          this.$store.state.quotes.count += 1;
           this.$store.dispatch('loadQuotes', true);
           this.$router.push({ name: 'home' });
           this.$notify({

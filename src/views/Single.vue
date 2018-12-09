@@ -21,7 +21,7 @@ export default {
 
   computed: {
     quote() {
-      return this.$store.state.quotes[this.id];
+      return this.$store.state.quotes.entities[this.id];
     },
 
     className() {

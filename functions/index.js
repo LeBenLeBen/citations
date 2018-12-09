@@ -83,3 +83,56 @@ exports.updateQuoteCounters = functions.firestore
 
     return null;
   });
+
+/**
+ * Everytime a quote is created or deleted
+ * Update the global counter cache at stats/quotes.count
+ */
+exports.updateQuoteStats = functions.firestore
+  .document('quotes/{quoteId}')
+  .onWrite(change => {
+    let increment;
+
+    if (change.after.exists && !change.before.exists) {
+      increment = 1;
+    } else if (!change.after.exists && change.before.exists) {
+      increment = -1;
+    } else {
+      return null;
+    }
+
+    const quotesStats = database.collection('stats').doc('quotes');
+
+    return database
+      .runTransaction(transaction => {
+        return transaction.get(quotesStats).then(doc => {
+          let count = (doc.exists && doc.data().count) || 0;
+          count = count + increment;
+          transaction.set(quotesStats, { count }, { merge: true });
+        });
+      })
+      .then(() => {
+        return console.log('Counter updated.');
+      });
+  });
+
+/**
+ * Recaclculate quotes counter cache from scratch
+ */
+exports.recountQuotes = functions.https.onRequest((request, response) => {
+  let count;
+
+  return database
+    .collection('quotes')
+    .get()
+    .then(querySnapshot => {
+      count = querySnapshot.size;
+      return database
+        .collection('stats')
+        .doc('quotes')
+        .set({ count }, { merge: true });
+    })
+    .then(() => {
+      response.status(200).send(`Updated quotes counter: ${count} quotes.`);
+    });
+});

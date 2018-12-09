@@ -8,7 +8,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    quotes: {},
+    quotes: {
+      entities: {},
+      count: null,
+    },
     quotesFiltered: [],
     lastQuote: null,
     complete: false,
@@ -37,7 +40,7 @@ export default new Vuex.Store({
     },
 
     addQuote(state, quote) {
-      Vue.set(state.quotes, quote.id, quote);
+      Vue.set(state.quotes.entities, quote.id, quote);
     },
 
     addQuoteToList(state, quoteId) {
@@ -53,7 +56,7 @@ export default new Vuex.Store({
     },
 
     toggleFeeling(state, { quoteId, userId, feelingCounter, feelingList }) {
-      const quote = state.quotes[quoteId];
+      const quote = state.quotes.entities[quoteId];
       let list = [...(quote[feelingList] || [])];
       let counter = quote[feelingCounter] || list.length;
       const likedIndex = list.indexOf(userId);
@@ -68,6 +71,10 @@ export default new Vuex.Store({
 
       Vue.set(quote, feelingList, list);
       quote[feelingCounter] = counter;
+    },
+
+    setQuotesCount(state, { count }) {
+      state.quotes.count = count;
     },
   },
 
@@ -111,6 +118,19 @@ export default new Vuex.Store({
       );
     },
 
+    loadQuotesCounter({ commit }) {
+      return database
+        .collection('stats')
+        .doc('quotes')
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            const count = doc.data().count;
+            commit('setQuotesCount', { count });
+          }
+        });
+    },
+
     loadQuote({ commit }, id) {
       return database
         .collection('quotes')
@@ -136,7 +156,7 @@ export default new Vuex.Store({
 
     toggleFeeling({ commit, dispatch, state }, { feeling, quoteId }) {
       const userId = state.user.uid;
-      const quote = state.quotes[quoteId];
+      const quote = state.quotes.entities[quoteId];
       let feelingCounter;
       let feelingList;
 
@@ -190,7 +210,7 @@ export default new Vuex.Store({
 
   getters: {
     quotesFiltered(state) {
-      return state.quotesFiltered.map(id => state.quotes[id]);
+      return state.quotesFiltered.map(id => state.quotes.entities[id]);
     },
   },
 });

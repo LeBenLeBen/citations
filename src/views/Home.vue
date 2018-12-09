@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <transition-group name="fade" mode="out-in" tag="div" class="container">
-      <!--<strong>{{ quotes.length }} témoignage{{ quotes.length > 1 ? 's' : '' }}</strong>-->
+      <div v-if="quotesCount" key="count" class="text-center text-bold mrgb+">{{ quotesCount }} témoignages</div>
       <transition-group name="list" tag="ul" class="quotes relative-parent list-stacked list-stacked--tight" key="list">
         <li v-for="quote in quotes" :key="quote.id" class="list-item">
           <Quote :quote="quote" />
@@ -80,7 +80,10 @@ export default {
   },
 
   computed: {
-    ...mapState(['complete']),
+    ...mapState({
+      complete: state => state.complete,
+      quotesCount: state => state.quotes.count,
+    }),
     ...mapGetters({
       quotes: 'quotesFiltered',
     }),
@@ -137,6 +140,7 @@ export default {
       this.$store.dispatch('loadQuotes').then(() => {
         this.loading = false;
       });
+      this.$store.dispatch('loadQuotesCounter');
     },
 
     scrollTop() {
