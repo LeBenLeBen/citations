@@ -2,7 +2,9 @@
   <div :class="['quote', className]">
     <div class="quote__body">
       <ul class="list-stacked list-stacked--divided">
-        <li v-for="(sentence, index) in quote.text" :key="index">{{ sentence }}</li>
+        <li v-for="(sentence, index) in textHighlighted" :key="index">
+          <span v-html="sentence"></span>
+        </li>
       </ul>
     </div>
     <div class="quote__meta">
@@ -23,6 +25,7 @@
 
 <script>
 import { format } from '@/helpers/date';
+import { escapeHtml } from '@/helpers/string';
 import { mapState } from 'vuex';
 import heartAltIcon from '@/assets/icons/heart-alt.svg';
 import heartIcon from '@/assets/icons/heart.svg';
@@ -47,6 +50,17 @@ export default {
 
     liked() {
       return this.quote.likedBy && this.quote.likedBy.includes(this.user.uid);
+    },
+
+    textHighlighted() {
+      return this.quote.text.map(text => {
+        text = escapeHtml(text);
+        text.replace(
+          /^([a-zA-Z\u00C0-\u017F\s.]+:)/,
+          '<span class="quote__participant">$1</span>'
+        );
+        return text;
+      });
     },
   },
 
