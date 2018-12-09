@@ -17,7 +17,7 @@
               <filter-icon class="icon" />
               <span v-if="filtersCount" class="btn__badge">{{ filtersCount }}</span>
             </button>
-            <Popover :open="this.filtersOpen">
+            <Popover :open="filtersOpen" @close="filtersOpen = false">
               <div class="form-group">
                 <label for="author" class="field-label pdgt0">Filtrer par poète</label>
                 <select v-model="author" id="author" class="field">

@@ -1,15 +1,25 @@
 <template>
   <transition name="pop">
-    <div class="popover" v-if="open">
+    <div v-if="open" class="popover" v-on-clickaway="close">
       <slot />
     </div>
   </transition>
 </template>
 
 <script>
+import { mixin as clickaway } from 'vue-clickaway';
+
 export default {
+  mixins: [clickaway],
+
   props: {
     open: Boolean,
+  },
+
+  methods: {
+    close() {
+      this.$emit('close');
+    },
   },
 };
 </script>
