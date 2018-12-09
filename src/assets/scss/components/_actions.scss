@@ -1,0 +1,25 @@
+/*----------------------------------------*\
+  ACTIONS
+\*----------------------------------------*/
+
+.actions {
+  position: fixed;
+  right: $spacing-unit-small;
+  bottom: $spacing-unit-small;
+  z-index: 2;
+
+  @include media('md') {
+    right: $spacing-unit-default;
+    bottom: $spacing-unit-default;
+  }
+}
+
+.actions--left {
+  right: auto;
+  left: $spacing-unit-small;
+
+  @include media('md') {
+    right: auto;
+    left: $spacing-unit-default;
+  }
+}

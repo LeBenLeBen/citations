@@ -62,7 +62,10 @@
       <div class="form-group">
         <div class="grid grid--right">
           <div class="grid__item sm-w-3/4">
-            <button type="submit" class="btn btn--primary">Inscrire dans les annales</button>
+            <ul class="list-inline">
+              <li class="pdgl0 pdgr pdgb-"><button type="submit" class="btn btn--primary">Inscrire dans les annales</button></li>
+              <li class="pdgl0 pdgr pdgb-"><router-link to="/" class="btn btn--default">Annuler</router-link></li>
+            </ul>
           </div>
         </div>
       </div>

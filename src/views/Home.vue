@@ -188,18 +188,6 @@ export default {
   text-align: center;
 }
 
-.actions {
-  position: fixed;
-  right: $spacing-unit-small;
-  bottom: $spacing-unit-small;
-  z-index: 2;
-
-  @include media('md') {
-    right: $spacing-unit-default;
-    bottom: $spacing-unit-default;
-  }
-}
-
 .add-btn {
   font-size: rem(64px);
   line-height: 0;
