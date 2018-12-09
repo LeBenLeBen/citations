@@ -1,14 +1,18 @@
 <template>
   <div class="home">
     <transition-group name="fade" mode="out-in" tag="div" class="container">
-      <div v-if="quotesCount" key="count" class="text-center text-bold mrgb+">{{ quotesCount }} témoignages</div>
-      <transition-group name="list" tag="ul" class="quotes relative-parent list-stacked list-stacked--tight" key="list">
+      <div v-if="quotesCount && filtersCount === 0" key="count" class="text-center text-bold mrgb+">{{ quotesCount }} témoignages</div>
+      <transition-group v-if="quotes.length" name="list" tag="ul" class="quotes relative-parent list-stacked list-stacked--tight" key="list">
         <li v-for="quote in quotes" :key="quote.id" class="list-item">
           <Quote :quote="quote" />
         </li>
       </transition-group>
+      <div v-else-if="!loading" key="list-empty" class="text-center text-muted">
+        Aucune citation à afficher.
+      </div>
       <Loader v-if="loading" key="loader" />
     </transition-group>
+
     <div class="actions">
       <ul class="list-stacked list-stacked--small">
         <li>
