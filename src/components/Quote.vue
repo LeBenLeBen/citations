@@ -79,7 +79,7 @@ export default {
     textHighlighted() {
       return this.quote.text.map(text => {
         text = escapeHtml(text);
-        text.replace(
+        text = text.replace(
           /^([a-zA-Z\u00C0-\u017F\s.]+:)/,
           '<span class="quote__participant">$1</span>'
         );
