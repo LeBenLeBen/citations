@@ -161,10 +161,9 @@ export default {
 
 .quote__participant {
   display: inline-block;
-  padding: 0 10px 3px;
+  padding: 0px 10px;
 
   font-weight: bold;
-  line-height: 1.3;
 
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 25px;
