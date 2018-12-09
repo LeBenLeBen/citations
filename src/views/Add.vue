@@ -129,7 +129,7 @@ export default {
             title: 'Impossible de sauver la citation',
             text: error.message,
           });
-        },
+        }
       );
       createAuthorIfNotExists({
         name: author,

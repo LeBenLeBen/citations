@@ -4,7 +4,7 @@ const scope = 'quotes';
 
 export function create(
   { quote, author, interlocutor, date },
-  options = { triggerSlackWebhook: true },
+  options = { triggerSlackWebhook: true }
 ) {
   const text = typeof quote === 'string' ? quote.split('\n') : quote;
   const timestamp = new Date(date).getTime();

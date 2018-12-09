@@ -152,7 +152,7 @@ export default {
         if (window.scrollY === 0) return;
         window.scrollTo(
           0,
-          Math.round(cosParameter + cosParameter * Math.cos(scrollCount)),
+          Math.round(cosParameter + cosParameter * Math.cos(scrollCount))
         );
         oldTimestamp = newTimestamp;
         window.requestAnimationFrame(step);

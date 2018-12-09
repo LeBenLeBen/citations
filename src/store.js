@@ -96,7 +96,7 @@ export default new Vuex.Store({
           if (querySnapshot.docs.length) {
             commit(
               'setLastQuote',
-              querySnapshot.docs[querySnapshot.docs.length - 1],
+              querySnapshot.docs[querySnapshot.docs.length - 1]
             );
           } else {
             commit('setIsComplete');
@@ -108,7 +108,7 @@ export default new Vuex.Store({
             title: 'Impossible de charger les citations',
             text: error.message,
           });
-        },
+        }
       );
     },
 
