@@ -29,7 +29,7 @@
                 <label for="order" class="field-label">Ordrer par</label>
                 <select v-model="order" id="order" class="field">
                   <option value="date">Date</option>
-                  <option value="likes">Popularité</option>
+                  <option value="score">Popularité</option>
                 </select>
               </div>
               <div class="form-group">

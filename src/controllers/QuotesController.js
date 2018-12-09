@@ -30,29 +30,26 @@ export function create(
     });
 }
 
-export function toggleLike({ quoteId, userId }) {
+export function toggleFeeling({ quoteId, userId, feelingList }) {
   return database
     .collection(scope)
     .doc(quoteId)
     .get()
     .then(querySnapshot => {
-      const likers =
-        (querySnapshot.data() && querySnapshot.data().likedBy) || [];
-      let likes = querySnapshot.data().likes || likers.length;
-      const index = likers.indexOf(userId);
+      const list =
+        (querySnapshot.data() && querySnapshot.data()[feelingList]) || [];
+      const index = list.indexOf(userId);
 
-      if (likers && index > -1) {
-        likers.splice(index, 1);
-        likes--;
+      if (list && index > -1) {
+        list.splice(index, 1);
       } else {
-        likers.push(userId);
-        likes++;
+        list.push(userId);
       }
 
       return database
         .collection(scope)
         .doc(quoteId)
-        .set({ likedBy: likers, likes }, { merge: true });
+        .update({ [feelingList]: list });
     });
 }
 

@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import _ from 'lodash';
 
 import { database } from '@/services/firebase';
-import { toggleLike } from '@/controllers/QuotesController';
+import { toggleFeeling } from '@/controllers/QuotesController';
 
 Vue.use(Vuex);
 
@@ -53,22 +52,22 @@ export default new Vuex.Store({
       state.complete = true;
     },
 
-    toggleLike(state, { quoteId, userId }) {
-      const quote = _.find(state.quotes, quote => quote.id === quoteId);
-      let likedBy = [...(quote.likedBy || [])];
-      let likes = quote.likes || likedBy.length;
-      const likedIndex = likedBy.indexOf(userId);
+    toggleFeeling(state, { quoteId, userId, feelingCounter, feelingList }) {
+      const quote = state.quotes[quoteId];
+      let list = [...(quote[feelingList] || [])];
+      let counter = quote[feelingCounter] || list.length;
+      const likedIndex = list.indexOf(userId);
 
       if (likedIndex > -1) {
-        likedBy.splice(likedIndex, 1);
-        likes--;
+        list.splice(likedIndex, 1);
+        counter--;
       } else {
-        likedBy.push(userId);
-        likes++;
+        list.push(userId);
+        counter++;
       }
 
-      Vue.set(quote, 'likedBy', likedBy);
-      quote.likes = likes;
+      Vue.set(quote, feelingList, list);
+      quote[feelingCounter] = counter;
     },
   },
 
@@ -135,29 +134,56 @@ export default new Vuex.Store({
       dispatch('loadQuotes', true);
     },
 
-    toggleLike({ commit, state }, quoteId) {
+    toggleFeeling({ commit, dispatch, state }, { feeling, quoteId }) {
       const userId = state.user.uid;
+      const quote = state.quotes[quoteId];
+      let feelingCounter;
+      let feelingList;
+
+      switch (feeling) {
+        case 'like':
+          // If user previously disliked, undo it
+          if ((quote.dislikedBy || []).includes(userId)) {
+            dispatch('toggleFeeling', { feeling: 'dislike', quoteId });
+          }
+          feelingCounter = 'likes';
+          feelingList = 'likedBy';
+          break;
+        case 'dislike':
+          // If user previously liked it, undo it
+          if ((quote.likedBy || []).includes(userId)) {
+            dispatch('toggleFeeling', { feeling: 'like', quoteId });
+          }
+          feelingCounter = 'dislikes';
+          feelingList = 'dislikedBy';
+          break;
+      }
 
       // Instantly update the UI
-      commit('toggleLike', {
+      commit('toggleFeeling', {
         quoteId,
         userId,
+        feelingCounter,
+        feelingList,
       });
 
-      return toggleLike({ userId, quoteId }).then(
+      return toggleFeeling({ userId, quoteId, feelingList }).then(
         () => {},
         error => {
           // Revert in case of error
-          commit('toggleLike', {
+          commit('toggleFeeling', {
             quoteId,
             userId,
+            feelingCounter,
+            feelingList,
           });
           Vue.notify({
             type: 'error',
-            title: 'Impossible d’aimer cette citation',
+            title:
+              'Impossible de sauvegarder votre sentiment à propos de cette citation',
             text: error.message,
           });
-        },
+        }
       );
     },
   },

@@ -7,19 +7,33 @@
         </li>
       </ul>
     </div>
-    <div class="quote__meta">
-      <strong>{{ quote.author }}</strong>
-      <span v-if="quote.interlocutor"> à <strong>{{ quote.interlocutor }}</strong></span>
-      le&nbsp;<router-link :to="`/quote/${quote.id}`" class="text-nowrap">{{ date }}</router-link>
-      <button :class="['btn btn--bare like', { 'like--liked': liked }]"
-        type="button"
-        @click="toggleLike"
-        :title="liked ? 'Je n’aime plus' : 'J’aime'">
-        <heart-alt-icon v-if="liked" class="like__icon icon" />
-        <heart-icon v-else class="like__icon icon" />
-        {{ quote.likes || 0 }}
-      </button>
-    </div>
+    <ul class="quote__meta list-inline list-inline--small list-inline--center">
+      <li>
+        <strong>{{ quote.author }}</strong>
+        <span v-if="quote.interlocutor"> à <strong>{{ quote.interlocutor }}</strong></span>
+        le&nbsp;<router-link :to="`/quote/${quote.id}`" class="text-nowrap">{{ date }}</router-link>
+      </li>
+      <li>
+        <button :class="['btn btn--bare feeling', { 'feeling--liked': liked }]"
+          type="button"
+          @click="toggleLike"
+          :title="liked ? 'Je n’aime plus' : 'J’aime'">
+          <heart-alt-icon v-if="liked" class="feeling__icon icon" />
+          <heart-icon v-else class="feeling__icon icon" />
+          {{ quote.likes || 0 }}
+        </button>
+      </li>
+      <li>
+        <button :class="['btn btn--bare feeling', { 'feeling--disliked': disliked }]"
+          type="button"
+          @click="toggleDislike"
+          :title="disliked ? 'Je hais plus' : 'J’aime pas'">
+          <poop-alt-icon v-if="disliked" class="feeling__icon icon" />
+          <poop-icon v-else class="feeling__icon icon" />
+          {{ quote.dislikes || 0 }}
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -29,11 +43,15 @@ import { escapeHtml } from '@/helpers/string';
 import { mapState } from 'vuex';
 import heartAltIcon from '@/assets/icons/heart-alt.svg';
 import heartIcon from '@/assets/icons/heart.svg';
+import poopAltIcon from '@/assets/icons/poop-alt.svg';
+import poopIcon from '@/assets/icons/poop.svg';
 
 export default {
   components: {
     'heart-alt-icon': heartAltIcon,
     'heart-icon': heartIcon,
+    'poop-alt-icon': poopAltIcon,
+    'poop-icon': poopIcon,
   },
 
   props: {
@@ -52,6 +70,12 @@ export default {
       return this.quote.likedBy && this.quote.likedBy.includes(this.user.uid);
     },
 
+    disliked() {
+      return (
+        this.quote.dislikedBy && this.quote.dislikedBy.includes(this.user.uid)
+      );
+    },
+
     textHighlighted() {
       return this.quote.text.map(text => {
         text = escapeHtml(text);
@@ -66,7 +90,17 @@ export default {
 
   methods: {
     toggleLike() {
-      this.$store.dispatch('toggleLike', this.quote.id);
+      this.$store.dispatch('toggleFeeling', {
+        feeling: 'like',
+        quoteId: this.quote.id,
+      });
+    },
+
+    toggleDislike() {
+      this.$store.dispatch('toggleFeeling', {
+        feeling: 'dislike',
+        quoteId: this.quote.id,
+      });
     },
   },
 };
@@ -125,6 +159,17 @@ export default {
   }
 }
 
+.quote__participant {
+  display: inline-block;
+  padding: 0 10px 3px;
+
+  font-weight: bold;
+  line-height: 1.3;
+
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
 .quote__meta {
   padding: $spacing-unit-tiny 75px 0;
 
@@ -176,19 +221,22 @@ export default {
   }
 }
 
-.like {
+.feeling {
   color: $alt-color;
   vertical-align: 0;
 }
 
-.like--liked {
+.feeling--liked {
   color: #ef82b6;
 }
 
-.like__icon {
+.feeling--disliked {
+  color: #91603d;
+}
+
+.feeling__icon {
   width: 18px;
   height: 18px;
-  margin-left: 14px;
   margin-right: 2px;
 
   fill: currentColor;
