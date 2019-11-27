@@ -18,5 +18,3 @@ export default instance;
 
 export const auth = instance.auth();
 export const database = instance.firestore();
-
-database.settings({ timestampsInSnapshots: true });

@@ -5,8 +5,6 @@ admin.initializeApp();
 
 const database = admin.firestore();
 
-database.settings({ timestampsInSnapshots: true });
-
 /**
  * Set likes, dislikes and score couters on all quotes
  * Only if it mistmatch the likers/dislikers list

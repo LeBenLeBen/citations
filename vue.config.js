@@ -7,7 +7,7 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        data: `
+        prependData: `
           @import '~kanbasu/src/scss/tools/functions';
           @import '~kanbasu/src/scss/tools/mixins';
           @import '@/assets/scss/settings/_settings.scss';
