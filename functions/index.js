@@ -7,7 +7,7 @@ const database = admin.firestore();
 
 /**
  * Set likes, dislikes and score couters on all quotes
- * Only if it mistmatch the likers/dislikers list
+ * Only if it mismatch the likers/dislikers list
  */
 exports.updateFeelingsAndScore = functions.https.onRequest(
   (request, response) => {
