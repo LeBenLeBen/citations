@@ -4,15 +4,24 @@ exports[`Quote.vue highlight like button if user has liked 1`] = `
 <div class="quote">
   <div class="quote__body">
     <ul class="list-stacked list-stacked--divided">
-      <li>Watson: excellent!</li>
-      <li>Sherlock: elementary.</li>
+      <li><span><span class="quote__participant">Watson:</span> excellent!</span></li>
+      <li><span><span class="quote__participant">Sherlock:</span> elementary.</span></li>
     </ul>
   </div>
-  <div class="quote__meta"><strong>Sherlock</strong> <span> à <strong>Watson</strong></span>
-    le&nbsp;<router-link-stub to="/quote/1" class="text-nowrap">1 janvier 2018</router-link-stub> <button type="button" title="Je n’aime plus" class="btn btn--bare like like--liked">
-      <heart-alt-icon-stub class="like__icon icon"></heart-alt-icon-stub>
-      1
-    </button></div>
+  <ul class="quote__meta list-inline list-inline--small list-inline--center">
+    <li><strong>Sherlock</strong> <span>
+        à <strong>Watson</strong></span>
+      le&nbsp;<router-link-stub to="/quote/1" class="text-nowrap">1 janvier 2018</router-link-stub>
+    </li>
+    <li><button type="button" title="Je n’aime plus" class="btn btn--bare feeling feeling--liked">
+        <heartalticon-stub class="feeling__icon icon"></heartalticon-stub>
+        1
+      </button></li>
+    <li><button type="button" title="J’aime pas" class="btn btn--bare feeling">
+        <poopicon-stub class="feeling__icon icon"></poopicon-stub>
+        0
+      </button></li>
+  </ul>
 </div>
 `;
 
@@ -20,14 +29,23 @@ exports[`Quote.vue renders quote 1`] = `
 <div class="quote">
   <div class="quote__body">
     <ul class="list-stacked list-stacked--divided">
-      <li>Watson: excellent!</li>
-      <li>Sherlock: elementary.</li>
+      <li><span><span class="quote__participant">Watson:</span> excellent!</span></li>
+      <li><span><span class="quote__participant">Sherlock:</span> elementary.</span></li>
     </ul>
   </div>
-  <div class="quote__meta"><strong>Sherlock</strong> <span> à <strong>Watson</strong></span>
-    le&nbsp;<router-link-stub to="/quote/1" class="text-nowrap">1 janvier 2018</router-link-stub> <button type="button" title="J’aime" class="btn btn--bare like">
-      <heart-icon-stub class="like__icon icon"></heart-icon-stub>
-      0
-    </button></div>
+  <ul class="quote__meta list-inline list-inline--small list-inline--center">
+    <li><strong>Sherlock</strong> <span>
+        à <strong>Watson</strong></span>
+      le&nbsp;<router-link-stub to="/quote/1" class="text-nowrap">1 janvier 2018</router-link-stub>
+    </li>
+    <li><button type="button" title="J’aime" class="btn btn--bare feeling">
+        <hearticon-stub class="feeling__icon icon"></hearticon-stub>
+        0
+      </button></li>
+    <li><button type="button" title="J’aime pas" class="btn btn--bare feeling">
+        <poopicon-stub class="feeling__icon icon"></poopicon-stub>
+        0
+      </button></li>
+  </ul>
 </div>
 `;

@@ -12,17 +12,38 @@
             <label for="author" class="field-label sm-text-right">Auteur</label>
           </div>
           <div class="grid__item w-3/4 sm-w-2/5">
-            <input v-if="newUserMode" ref="author" type="text" v-model="author" id="author" class="field">
-            <select v-else ref="author" v-model="author" id="author" class="field">
+            <input
+              v-if="newUserMode"
+              ref="author"
+              type="text"
+              v-model="author"
+              id="author"
+              class="field"
+            />
+            <select
+              v-else
+              ref="author"
+              v-model="author"
+              id="author"
+              class="field"
+            >
               <option value="" selected></option>
-              <option v-for="(author, i) in authors" :key="i">{{ author.name }}</option>
+              <option v-for="(author, i) in authors" :key="i">{{
+                author.name
+              }}</option>
             </select>
           </div>
           <div class="grid__item w-1/4 sm-w-1/5">
-            <button type="button"
+            <button
+              type="button"
               class="btn btn--default btn--circle"
               @click="toggleUserMode"
-              :title="newUserMode ? 'Utiliser un auteur existant' : 'Ajouter un auteur'">
+              :title="
+                newUserMode
+                  ? 'Utiliser un auteur existant'
+                  : 'Ajouter un auteur'
+              "
+            >
               <minus-icon v-if="newUserMode" class="icon" />
               <plus-icon v-else class="icon" />
             </button>
@@ -32,30 +53,53 @@
       <div class="form-group">
         <div class="grid grid--middle">
           <div class="grid__item sm-w-1/4">
-            <label for="interlocutor" class="field-label sm-text-right">Interlocuteur</label>
+            <label for="interlocutor" class="field-label sm-text-right"
+              >Interlocuteur</label
+            >
           </div>
           <div class="grid__item sm-w-2/5">
-            <input v-model="interlocutor" type="text" id="interlocutor" class="field">
+            <input
+              v-model="interlocutor"
+              type="text"
+              id="interlocutor"
+              class="field"
+            />
           </div>
         </div>
       </div>
       <div class="form-group">
         <div class="grid grid--middle">
           <div class="grid__item sm-w-1/4">
-            <label for="date" class="field-label sm-text-right">Date <abbr title="Requis" class="text-danger">*</abbr></label>
+            <label for="date" class="field-label sm-text-right"
+              >Date <abbr title="Requis" class="text-danger">*</abbr></label
+            >
           </div>
           <div class="grid__item sm-w-2/5">
-            <input v-model="date" type="date" id="date" class="field" required>
+            <input
+              v-model="date"
+              type="date"
+              id="date"
+              class="field"
+              required
+            />
           </div>
         </div>
       </div>
       <div class="form-group">
         <div class="grid">
           <div class="grid__item sm-w-1/4">
-            <label for="quote" class="field-label sm-text-right">Poésie <abbr title="Requis" class="text-danger">*</abbr></label>
+            <label for="quote" class="field-label sm-text-right"
+              >Poésie <abbr title="Requis" class="text-danger">*</abbr></label
+            >
           </div>
           <div class="grid__item sm-w-3/4">
-            <textarea v-model="quote" id="quote" rows="3" class="field" required></textarea>
+            <textarea
+              v-model="quote"
+              id="quote"
+              rows="3"
+              class="field"
+              required
+            ></textarea>
           </div>
         </div>
       </div>
@@ -63,8 +107,16 @@
         <div class="grid grid--right">
           <div class="grid__item sm-w-3/4">
             <ul class="list-inline">
-              <li class="pdgl0 pdgr pdgb-"><button type="submit" class="btn btn--primary">Inscrire dans les annales</button></li>
-              <li class="pdgl0 pdgr pdgb-"><router-link to="/" class="btn btn--default">Annuler</router-link></li>
+              <li class="pdgl0 pdgr pdgb-">
+                <button type="submit" class="btn btn--primary">
+                  Inscrire dans les annales
+                </button>
+              </li>
+              <li class="pdgl0 pdgr pdgb-">
+                <router-link to="/" class="btn btn--default"
+                  >Annuler</router-link
+                >
+              </li>
             </ul>
           </div>
         </div>

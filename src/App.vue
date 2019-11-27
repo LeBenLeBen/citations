@@ -1,13 +1,20 @@
 <template>
   <div id="app" class="master">
     <header class="topbar" v-if="hasUser">
-      <h1 class="app-title app-title--shrinked"><router-link to="/">Quotes</router-link></h1>
+      <h1 class="app-title app-title--shrinked">
+        <router-link to="/">Quotes</router-link>
+      </h1>
 
       <ul class="list-inline list-inline--small list-inline--right">
         <li class="hidden-xs-down">{{ name }}</li>
         <li class="hidden-xs-down"><Avatar :src="user.photoURL" /></li>
         <li>
-          <button type="button" class="btn btn--circle btn--default" @click="logout" title="Se déconnecter">
+          <button
+            type="button"
+            class="btn btn--circle btn--default"
+            @click="logout"
+            title="Se déconnecter"
+          >
             <leave-icon class="icon" />
           </button>
         </li>

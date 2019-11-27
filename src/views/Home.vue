@@ -1,8 +1,20 @@
 <template>
   <div class="home">
     <transition-group name="fade" mode="out-in" tag="div" class="container">
-      <div v-if="quotesCount && filtersCount === 0" key="count" class="text-center text-bold mrgb+">{{ quotesCount }} témoignages</div>
-      <transition-group v-if="quotes.length" name="list" tag="ul" class="quotes relative-parent list-stacked list-stacked--tight" key="list">
+      <div
+        v-if="quotesCount && filtersCount === 0"
+        key="count"
+        class="text-center text-bold mrgb+"
+      >
+        {{ quotesCount }} témoignages
+      </div>
+      <transition-group
+        v-if="quotes.length"
+        name="list"
+        tag="ul"
+        class="quotes relative-parent list-stacked list-stacked--tight"
+        key="list"
+      >
         <li v-for="quote in quotes" :key="quote.id" class="list-item">
           <Quote :quote="quote" />
         </li>
@@ -17,16 +29,26 @@
       <ul class="list-stacked list-stacked--small">
         <li>
           <div class="relative-parent">
-            <button class="btn btn--default btn--circle" @click.prevent="filtersOpen = !filtersOpen" title="Filtrer">
+            <button
+              class="btn btn--default btn--circle"
+              @click.prevent="filtersOpen = !filtersOpen"
+              title="Filtrer"
+            >
               <filter-icon class="icon" />
-              <span v-if="filtersCount" class="btn__badge">{{ filtersCount }}</span>
+              <span v-if="filtersCount" class="btn__badge">{{
+                filtersCount
+              }}</span>
             </button>
             <Popover :open="filtersOpen" @close="filtersOpen = false">
               <div class="form-group">
-                <label for="author" class="field-label pdgt0">Filtrer par poète</label>
+                <label for="author" class="field-label pdgt0"
+                  >Filtrer par poète</label
+                >
                 <select v-model="author" id="author" class="field">
                   <option value="" selected></option>
-                  <option v-for="(author, i) in authors" :key="i">{{ author.name }}</option>
+                  <option v-for="(author, i) in authors" :key="i">{{
+                    author.name
+                  }}</option>
                 </select>
               </div>
               <div class="form-group">
@@ -37,13 +59,22 @@
                 </select>
               </div>
               <div class="form-group">
-                <button class="btn btn--primary btn--block" @click="resetFilters">Réinitialiser</button>
+                <button
+                  class="btn btn--primary btn--block"
+                  @click="resetFilters"
+                >
+                  Réinitialiser
+                </button>
               </div>
             </Popover>
           </div>
         </li>
-       <li>
-          <router-link to="/add" class="btn btn--primary btn--circle" title="Ajouter une entrée">
+        <li>
+          <router-link
+            to="/add"
+            class="btn btn--primary btn--circle"
+            title="Ajouter une entrée"
+          >
             <plus-icon class="icon" />
           </router-link>
         </li>

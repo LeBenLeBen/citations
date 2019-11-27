@@ -1,7 +1,14 @@
 <template>
   <div class="text-center">
     <Loader v-if="loading" />
-    <button v-else type="button" class="btn btn--primary btn--large" @click="login">Connexion avec Google</button>
+    <button
+      v-else
+      type="button"
+      class="btn btn--primary btn--large"
+      @click="login"
+    >
+      Connexion avec Google
+    </button>
   </div>
 </template>
 

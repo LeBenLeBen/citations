@@ -10,24 +10,32 @@
     <ul class="quote__meta list-inline list-inline--small list-inline--center">
       <li>
         <strong>{{ quote.author }}</strong>
-        <span v-if="quote.interlocutor"> à <strong>{{ quote.interlocutor }}</strong></span>
-        le&nbsp;<router-link :to="`/quote/${quote.id}`" class="text-nowrap">{{ date }}</router-link>
+        <span v-if="quote.interlocutor">
+          à <strong>{{ quote.interlocutor }}</strong></span
+        >
+        le&nbsp;<router-link :to="`/quote/${quote.id}`" class="text-nowrap">{{
+          date
+        }}</router-link>
       </li>
       <li>
-        <button :class="['btn btn--bare feeling', { 'feeling--liked': liked }]"
+        <button
+          :class="['btn btn--bare feeling', { 'feeling--liked': liked }]"
           type="button"
           @click="toggleLike"
-          :title="liked ? 'Je n’aime plus' : 'J’aime'">
+          :title="liked ? 'Je n’aime plus' : 'J’aime'"
+        >
           <heart-alt-icon v-if="liked" class="feeling__icon icon" />
           <heart-icon v-else class="feeling__icon icon" />
           {{ quote.likes || 0 }}
         </button>
       </li>
       <li>
-        <button :class="['btn btn--bare feeling', { 'feeling--disliked': disliked }]"
+        <button
+          :class="['btn btn--bare feeling', { 'feeling--disliked': disliked }]"
           type="button"
           @click="toggleDislike"
-          :title="disliked ? 'Je hais plus' : 'J’aime pas'">
+          :title="disliked ? 'Je hais plus' : 'J’aime pas'"
+        >
           <poop-alt-icon v-if="disliked" class="feeling__icon icon" />
           <poop-icon v-else class="feeling__icon icon" />
           {{ quote.dislikes || 0 }}
@@ -48,10 +56,10 @@ import poopIcon from '@/assets/icons/poop.svg';
 
 export default {
   components: {
-    'heart-alt-icon': heartAltIcon,
-    'heart-icon': heartIcon,
-    'poop-alt-icon': poopAltIcon,
-    'poop-icon': poopIcon,
+    heartAltIcon,
+    heartIcon,
+    poopAltIcon,
+    poopIcon,
   },
 
   props: {

@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "validate": "vue-cli-service lint --no-fix",
+    "format": "vue-cli-service lint",
     "deploy": "firebase deploy",
     "start": "vue-cli-service serve",
     "test:unit": "vue-cli-service test:unit",
-    "test": "npm run test:unit"
+    "test:unit:dev": "vue-cli-service test:unit --watch",
+    "test": "npm run validate && npm run test:unit"
   },
   "dependencies": {
     "date-fns": "^2.8.1",

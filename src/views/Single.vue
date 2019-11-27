@@ -6,7 +6,11 @@
     </div>
 
     <div class="actions actions--left">
-      <router-link to="/" class="btn btn--default btn--circle" title="Retour à l’accueil">
+      <router-link
+        to="/"
+        class="btn btn--default btn--circle"
+        title="Retour à l’accueil"
+      >
         <home-icon class="icon" />
       </router-link>
     </div>
