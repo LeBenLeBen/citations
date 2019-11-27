@@ -145,7 +145,7 @@ export default {
       quote: '',
       author: null,
       interlocutor: '',
-      date: format(new Date(), 'YYYY-MM-DD'),
+      date: format(new Date(), 'yyyy-MM-dd'),
       newUserMode: false,
     };
   },
