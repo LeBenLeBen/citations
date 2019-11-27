@@ -33,16 +33,40 @@ You are free to configure the access rules as you whish, but if you are too rest
 You don’t have to setup any database collection manually, they will be created when you add the first quote from the app.
 
 ## Compiles and hot-reloads for development
+
 ```bash
 npm start
 ```
 
 ## Compiles and minifies for production
+
 ```bash
+# Build for production
 npm run build
+
+# Build with "dev" environment variables (defined in .env.dev.local)
+# See https://cli.vuejs.org/guide/mode-and-env.html
+npm run build -- --mode dev
 ```
 
 ## Lints and fixes files
+
 ```bash
 npm run lint
+```
+
+## Deploy
+
+You need the Firebase cli installed (`npm i -g firebase-tools`).
+
+⚠️ Don’t forget to build your app first, see above.
+
+```bash
+# Projects are defined in the `.firebaserc`
+
+# Deploy the "default" project
+firebase deploy
+
+# Deploy the "prod" project
+firebase -P prod deploy
 ```
